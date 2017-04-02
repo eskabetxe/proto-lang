@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.*;
 
 @SuppressWarnings("serial")
-public class ProtoObject<T extends ProtoObject<T>> implements Serializable, Cloneable, Comparable<T> {
+public abstract class ProtoObject<T extends ProtoObject<T>> implements Serializable, Cloneable, Comparable<T> {
     
     @SuppressWarnings("unchecked")
     @Override
