@@ -17,79 +17,79 @@ public abstract class ProtoObject<T extends ProtoObject<T>> implements Serializa
     
     @SuppressWarnings("unchecked")
     @Override
-	public T clone() throws SerializationException {
+    public T clone() throws SerializationException {
         try {
-        	T clone = (T)super.clone();
-        	for (Field cField : processFields()) {
-		    	Object value = cField.get(this);
-		    	if(value!=null && ClassUtils.isAssignable(value.getClass(), ProtoObject.class)){
-	    			cField.set(clone, ((ProtoObject<?>)value).clone());
-		    	}else if(value!=null && ClassUtils.isAssignable(value.getClass(), Cloneable.class)){
-		    		cField.set(clone, ObjectUtils.clone(value));
-		    	}
-			}
-			return clone;
-		} catch (Exception e) {
-			throw new SerializationException(e);
-		}
+            T clone = (T)super.clone();
+            for (Field cField : processFields()) {
+                Object value = cField.get(this);
+                if(value!=null && ClassUtils.isAssignable(value.getClass(), ProtoObject.class)){
+                    cField.set(clone, ((ProtoObject<?>)value).clone());
+                }else if(value!=null && ClassUtils.isAssignable(value.getClass(), Cloneable.class)){
+                    cField.set(clone, ObjectUtils.clone(value));
+                }
+            }
+            return clone;
+        } catch (Exception e) {
+            throw new SerializationException(e);
+        }
     }
     
     private List<Field> processFields(){
-    	List<Field> pFields = new ArrayList<Field>();
-		for (Class<?> c = getClass(); c != null; c = c.getSuperclass()) {
-	        Field[] fields = c.getDeclaredFields();
-	        for (Field cField : fields) {
-	        	if (!Modifier.isStatic(cField.getModifiers())
+        List<Field> pFields = new ArrayList<Field>();
+        for (Class<?> c = getClass(); c != null; c = c.getSuperclass()) {
+            Field[] fields = c.getDeclaredFields();
+            for (Field cField : fields) {
+                if (!Modifier.isStatic(cField.getModifiers())
                         && !Modifier.isTransient(cField.getModifiers())) {
-	        	    cField.setAccessible(true);
-		        	pFields.add(cField);
-	        	}
-	        }
-	    }
-		return pFields;
-	}
+                    cField.setAccessible(true);
+                    pFields.add(cField);
+                }
+            }
+        }
+        return pFields;
+    }
     
     @Override
-	public boolean equals(Object o) {
-	    if(o == null) return false;
-	    if(this == o) return true;
-	    if(this.getClass() != o.getClass()) return false;	   
-	
-	    EqualsBuilder equals =  new EqualsBuilder();
-	    for (Field cField : processFields()) {
-			try {
-				equals.append(cField.get(this), cField.get(o));
-			} catch (IllegalAccessException e) {
-				return false;
-	        }
-		}
-	    return equals.isEquals();
-	}
+    public boolean equals(Object o) {
+        if(o == null) return false;
+        if(this == o) return true;
+        if(this.getClass() != o.getClass()) return false;       
+    
+        EqualsBuilder equals =  new EqualsBuilder();
+        for (Field cField : processFields()) {
+            try {
+                equals.append(cField.get(this), cField.get(o));
+            } catch (IllegalAccessException e) {
+                return false;
+            }
+        }
+        return equals.isEquals();
+    }
     
     @Override
     public int hashCode(){
-	    HashCodeBuilder hash =  new HashCodeBuilder(17, 37);
-	    for (Field cField : processFields()) {
-    		try {
-				hash.append(cField.get(this));
-			} catch (IllegalAccessException e) {
-				return -1;
-			}
-		}
-	    return hash.toHashCode();
+        HashCodeBuilder hash =  new HashCodeBuilder(17, 37);
+        for (Field cField : processFields()) {
+            try {
+                hash.append(cField.get(this));
+            } catch (IllegalAccessException e) {
+                return -1;
+            }
+        }
+        return hash.toHashCode();
     }
     
     @Override
     public String toString(){
-    	ToStringBuilder tostring = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-	    for (Field cField : processFields()) {
-    		try {
-    			tostring.append(cField.getName(), cField.get(this));
-			} catch (IllegalAccessException e) {
-				return StringUtils.EMPTY;
-			}
-		}
-	    return tostring.toString();
+        ToStringBuilder tostring = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        for (Field cField : processFields()) {
+            try {
+                tostring.append(cField.getName(), cField.get(this));
+            } catch (IllegalAccessException e) {
+                return StringUtils.EMPTY;
+            }
+        }
+        return tostring.toString();
     }
 
     @Override
@@ -109,24 +109,24 @@ public abstract class ProtoObject<T extends ProtoObject<T>> implements Serializa
     }
     
     public boolean hasNotInfo() {
-    	return !hasInfo();
+        return !hasInfo();
     }
     @SuppressWarnings("rawtypes")
-	public boolean hasInfo() {
-    	try{
-	    	boolean info = false; 
-		    for (Field cField : processFields()) {
-		    	Object value = cField.get(this);
-		    	if(value!=null && ClassUtils.isAssignable(value.getClass(), ProtoObject.class)){
-		    		info = info || ((ProtoObject)value).hasInfo();
-		    	}else{
-		    		info = info || (value!= null);
-		    	}
-			}
-		    return info;
-    	}catch (Exception e){
-    		return false;
-		}
+    public boolean hasInfo() {
+        try{
+            boolean info = false; 
+            for (Field cField : processFields()) {
+                Object value = cField.get(this);
+                if(value!=null && ClassUtils.isAssignable(value.getClass(), ProtoObject.class)){
+                    info = info || ((ProtoObject)value).hasInfo();
+                }else{
+                    info = info || (value!= null);
+                }
+            }
+            return info;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 }

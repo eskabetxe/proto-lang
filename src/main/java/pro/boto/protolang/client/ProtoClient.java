@@ -18,7 +18,7 @@ public abstract class ProtoClient {
     	MAPPER = new ObjectMapper();
     	MAPPER.registerModule(new AfterburnerModule());
     	
-    	MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     	MAPPER.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     	
     	MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
