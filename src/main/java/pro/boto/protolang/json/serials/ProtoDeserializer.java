@@ -1,4 +1,4 @@
-package pro.boto.protolang.serials;
+package pro.boto.protolang.json.serials;
 
 import java.io.IOException;
 import java.text.ParseException;

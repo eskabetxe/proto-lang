@@ -6,10 +6,31 @@
 
     <groupId>pro.boto</groupId>
     <artifactId>proto-lang</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <packaging>jar</packaging>
     <name>proto language libraries module</name>
+    <url>https://github.com/eskabetxe/proto-lang</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Joao Boto</name>
+            <email>boto@boto.pro</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/eskabetxe/proto-lang.git</connection>
+        <developerConnection>scm:git:ssh://github.com:eskabetxe/proto-lang.git</developerConnection>
+        <url>https://github.com/eskabetxe/proto-lang.git</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,6 +51,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.8.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

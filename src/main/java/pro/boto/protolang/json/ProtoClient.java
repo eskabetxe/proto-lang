@@ -1,4 +1,4 @@
-package pro.boto.protolang.client;
+package pro.boto.protolang.json;
 
 import java.io.IOException;
 
@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
+/**
+ * @author eskabetxe
+ */
 public abstract class ProtoClient {
 
     private static ObjectMapper MAPPER;

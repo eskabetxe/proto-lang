@@ -1,4 +1,4 @@
-package pro.boto.protolang.serials;
+package pro.boto.protolang.json.serials;
 
 public interface ProtoField {
 

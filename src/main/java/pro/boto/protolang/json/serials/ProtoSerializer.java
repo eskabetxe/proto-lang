@@ -1,4 +1,4 @@
-package pro.boto.protolang.serials;
+package pro.boto.protolang.json.serials;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import pro.boto.protolang.domain.ProtoList;
 import pro.boto.protolang.domain.ProtoObject;
-
 
 public abstract class ProtoSerializer<T> extends com.fasterxml.jackson.databind.JsonSerializer<T> {
     
