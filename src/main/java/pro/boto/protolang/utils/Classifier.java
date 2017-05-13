@@ -31,6 +31,10 @@ public class Classifier {
         return isAssignable(value, Float.class);
     }
 
+    public static boolean isNumber(Object value){
+        return isAssignable(value, Number.class);
+    }
+
     public static boolean isBoolean(Object value){
         return isAssignable(value, Boolean.class);
     }

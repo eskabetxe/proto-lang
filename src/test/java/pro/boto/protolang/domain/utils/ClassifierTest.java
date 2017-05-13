@@ -4,11 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import pro.boto.protolang.utils.Classifier;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
 
 public class ClassifierTest {
 
@@ -36,6 +32,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isInteger(SHORT));
         assertFalse(Classifier.isInteger(CHAR));
         assertFalse(Classifier.isInteger(STRING));
+        assertFalse(Classifier.isInteger(DATE));
     }
 
     @Test
@@ -49,6 +46,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isLong(SHORT));
         assertFalse(Classifier.isLong(CHAR));
         assertFalse(Classifier.isLong(STRING));
+        assertFalse(Classifier.isLong(DATE));
     }
 
     @Test
@@ -62,6 +60,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isDouble(SHORT));
         assertFalse(Classifier.isDouble(CHAR));
         assertFalse(Classifier.isDouble(STRING));
+        assertFalse(Classifier.isDouble(DATE));
     }
 
     @Test
@@ -75,6 +74,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isFloat(SHORT));
         assertFalse(Classifier.isFloat(CHAR));
         assertFalse(Classifier.isFloat(STRING));
+        assertFalse(Classifier.isFloat(DATE));
     }
 
     @Test
@@ -88,6 +88,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isBoolean(SHORT));
         assertFalse(Classifier.isBoolean(CHAR));
         assertFalse(Classifier.isBoolean(STRING));
+        assertFalse(Classifier.isBoolean(DATE));
     }
 
     @Test
@@ -101,6 +102,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isByte(SHORT));
         assertFalse(Classifier.isByte(CHAR));
         assertFalse(Classifier.isByte(STRING));
+        assertFalse(Classifier.isByte(DATE));
     }
 
     @Test
@@ -114,6 +116,7 @@ public class ClassifierTest {
         assertTrue(Classifier.isShort(SHORT));
         assertFalse(Classifier.isShort(CHAR));
         assertFalse(Classifier.isShort(STRING));
+        assertFalse(Classifier.isShort(DATE));
     }
 
     @Test
@@ -127,6 +130,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isChar(SHORT));
         assertTrue(Classifier.isChar(CHAR));
         assertFalse(Classifier.isChar(STRING));
+        assertFalse(Classifier.isChar(DATE));
     }
 
     @Test
@@ -140,6 +144,7 @@ public class ClassifierTest {
         assertFalse(Classifier.isString(SHORT));
         assertFalse(Classifier.isString(CHAR));
         assertTrue(Classifier.isString(STRING));
+        assertFalse(Classifier.isString(DATE));
     }
 
     @Test
@@ -154,6 +159,20 @@ public class ClassifierTest {
         assertFalse(Classifier.isDate(CHAR));
         assertFalse(Classifier.isDate(STRING));
         assertTrue(Classifier.isDate(DATE));
+    }
+
+    @Test
+    public void isNumber(){
+        assertTrue(Classifier.isNumber(INT));
+        assertTrue(Classifier.isNumber(LONG));
+        assertTrue(Classifier.isNumber(DOUBLE));
+        assertTrue(Classifier.isNumber(FLOAT));
+        assertTrue(Classifier.isNumber(SHORT));
+        assertTrue(Classifier.isNumber(BYTE));
+        assertFalse(Classifier.isNumber(BOOL));
+        assertFalse(Classifier.isNumber(CHAR));
+        assertFalse(Classifier.isNumber(STRING));
+        assertFalse(Classifier.isNumber(DATE));
     }
 
 }
