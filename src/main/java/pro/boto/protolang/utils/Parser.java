@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -19,7 +18,7 @@ import static pro.boto.protolang.utils.Classifier.*;
 public class Parser {
     
     private static Logger log = LoggerFactory.getLogger(Parser.class);
-    
+
     public static Integer toInteger(Object value){
         if (value == null) return null;
         if (isInteger(value)) return (Integer) value;
@@ -29,7 +28,7 @@ public class Parser {
             return ((Number)Math.round(n.doubleValue())).intValue();
         }
 
-        String sValue = Cleaner.toInteger(String.valueOf(value));
+        String sValue = Cleaner.toNumberWithoutDecimals(String.valueOf(value));
         if (StringUtils.isBlank(sValue)) return null;
         
         try {
@@ -49,13 +48,32 @@ public class Parser {
             return ((Number)Math.round(n.doubleValue())).longValue();
         }
 
-        String sValue = Cleaner.toInteger(String.valueOf(value));
+        String sValue = Cleaner.toNumberWithoutDecimals(String.valueOf(value));
         if (StringUtils.isBlank(sValue)) return null;
 
         try {
             return Long.parseLong(sValue);
         } catch (Exception e) {
-            log.error("parsing to integer: "+value+" - "+e.getMessage());
+            log.error("parsing to long: "+value+" - "+e.getMessage());
+            return null;
+        }
+    }
+
+    public static Float toFloat(Object value){
+        if (value == null) return null;
+        if (isFloat(value)) return (Float) value;
+        if (isNumber(value)){
+            Number n = (Number) value;
+            return ((Number)Math.round(n.doubleValue())).floatValue();
+        }
+
+        String sValue = Cleaner.toNumberWithDecimals(String.valueOf(value));
+        if (StringUtils.isBlank(sValue)) return null;
+
+        try {
+            return Float.parseFloat(sValue);
+        } catch (Exception e) {
+            log.error("parsing to float: "+value+" - "+e.getMessage());
             return null;
         }
     }
@@ -67,7 +85,7 @@ public class Parser {
         if (isLong(value)) return toLong(value).doubleValue();
         if (isInteger(value)) return toInteger(value).doubleValue();
         
-        String sValue = Cleaner.toDouble(String.valueOf(value));
+        String sValue = Cleaner.toNumberWithDecimals(String.valueOf(value));
         if (StringUtils.isBlank(sValue)) return null;
         
         try {

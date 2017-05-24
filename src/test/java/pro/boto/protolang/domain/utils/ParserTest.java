@@ -21,7 +21,7 @@ public class ParserTest {
         Assert.assertEquals(expected, Parser.toInteger(actual));
     }
 
-    @Test
+    //@Test
     public void nnnn(){
         Float dd = new Float(23.523454321);
         System.out.println(dd.intValue());

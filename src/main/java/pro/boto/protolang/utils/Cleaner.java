@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Cleaner {
+
+	private static Pattern NUMBER = Pattern.compile("^((-|\\+)?(\\d+)((,|\\.)(\\d+))?)$");
 	
 	public static String trim(String value){
 		String toTrim = StringUtils.trim(value);
@@ -31,18 +33,17 @@ public class Cleaner {
 		return value;
 	}
 	
-	private static Pattern INTEGER = Pattern.compile("^((-|\\+)?(\\d+))((,|\\.)(\\d+))?$");
-	public static String toInteger(String value){
+	public static String toNumberWithoutDecimals(String value){
 		if(StringUtils.isBlank(value)) return null;
-		Matcher matcher = INTEGER.matcher(toNumber(value));
+		Matcher matcher = NUMBER.matcher(toNumber(value));
 		if(!matcher.matches()) return null;
-		return matcher.replaceAll("$1");
+		return matcher.replaceAll("$3");
 	}
 	
-	private static Pattern DOUBLE = Pattern.compile("^((-|\\+)?(\\d+)((,|\\.)(\\d+))?)$");
-	public static String toDouble(String value){
+
+	public static String toNumberWithDecimals(String value){
 		if(StringUtils.isBlank(value)) return null;
-		Matcher matcher = DOUBLE.matcher(toNumber(value));
+		Matcher matcher = NUMBER.matcher(toNumber(value));
 		if(!matcher.matches()) return null;
 		return matcher.replaceAll("$1").replace(",", ".");
 	}
