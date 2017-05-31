@@ -16,6 +16,7 @@ import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 public abstract class ProtoClient {
 
     private static ObjectMapper MAPPER;
+    private static ObjectMapper MAPPER_PRETTY;
 
     static {
     	MAPPER = new ObjectMapper();
@@ -27,15 +28,16 @@ public abstract class ProtoClient {
     	MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     	MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     	MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        MAPPER_PRETTY = MAPPER.copy();
+        MAPPER_PRETTY.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     private final static ObjectMapper obtainPrettyMapper(){
-    	ObjectMapper mapper = MAPPER.copy();
-    	mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        return mapper;
+        return MAPPER_PRETTY;
     }
     private final static ObjectMapper obtainMapper(){
-        return MAPPER.copy();
+        return MAPPER;
     }
     
     public static String obtainJson(Object object) throws IOException{

@@ -129,7 +129,7 @@ public abstract class ProtoDeserializer<T> extends com.fasterxml.jackson.databin
     }
     
     @SuppressWarnings({ "unchecked" })
-    protected <P extends Object> List<P> deserializeList(ProtoField field, Class<P> clazz) throws IOException {
+    protected <P> List<P> deserializeList(ProtoField field, Class<P> clazz) throws IOException {
         JsonNode node =  deserialize(field);
         if(!node.isArray())return null;
         
@@ -139,7 +139,7 @@ public abstract class ProtoDeserializer<T> extends com.fasterxml.jackson.databin
         return (List<P>) bean;
     }
     @SuppressWarnings({ "unchecked" })
-    protected <P extends Object> LinkedList<P> deserializeLinkedList(ProtoField field, Class<P> clazz) throws IOException {
+    protected <P> LinkedList<P> deserializeLinkedList(ProtoField field, Class<P> clazz) throws IOException {
         JsonNode node =  deserialize(field);
         if(!node.isArray())return null;
         

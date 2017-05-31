@@ -13,4 +13,4 @@ class TestObject extends ProtoObject<TestObject> {
         stringVal = sVal;
         longVal = lVal;
     }
-};
+}
